@@ -4,6 +4,6 @@
 .Ruserdata
 *.txt
 *.csv
-/database/*
-/rsconnect/*
+/database/
+/rsconnect/
 
