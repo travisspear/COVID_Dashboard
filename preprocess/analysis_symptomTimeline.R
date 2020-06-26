@@ -11,7 +11,7 @@ symptomTimeline_data <- data_final %>%
   #                  any(Measurement_Name %>% str_detect("Discharge|(Length of Hospital Stay)")) ~ 0,
   #                  TRUE ~ .5)) %>%
   # ungroup() %>%
-  filter(Measurement_Name %>% str_detect(regex("Symptom|radiograph|x-ray|\\(ct\\)"))) %>%
+  filter(Measurement_Name %>% str_detect(regex("Symptom|radiograph|x-ray|\\(ct\\)", ignore_case = T))) %>%
   mutate(Time_Factor = case_when(Time_Unit == "At Admission" ~ 0,
                                  Time_Unit == "Days Before Admission" ~ -1,
                                  Time_Unit == "Days After Admission" ~ 1,
@@ -62,7 +62,7 @@ symptomTimeline_data <- data_final %>%
   group_by(SourceId, Arm_Name, Measurement_Name, meta_outcome) %>%
   filter(Time_SymptomStart == min(Time_SymptomStart, na.rm = T))
 
-
+ 
 
 symptomTimeline_graph <- symptomTimeline_data %>%
   filter(Measurement_Class != "NA") %>%
